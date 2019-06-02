@@ -1,0 +1,26 @@
+version: '3'
+services:
+
+  ### mongodb container #########################################
+
+  mongodb:
+      image: mongo:4.0.9-xenial
+      environment:
+        TZ: Asia/Shanghai
+        LANG: C.UTF-8
+        # MONGO_INITDB_ROOT_USERNAME: yapi
+        # MONGO_INITDB_ROOT_PASSWORD: yapi6203
+      restart: always
+
+  ### yapi container #########################################
+
+  yapi:
+      build:
+        context: .
+      ports:
+        - "3000:3000"
+      links:
+        - mongodb:mongodb
+      volumes:
+        - ./log:/api/log:rw
+      restart: always
