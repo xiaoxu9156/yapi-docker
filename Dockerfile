@@ -19,6 +19,7 @@ RUN apk update && apk add --no-cache tzdata && cp /usr/share/zoneinfo/PRC /etc/l
 COPY --from=builder /api/vendors /api/vendors
 COPY config.json /api/
 COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 EXPOSE 3000
 WORKDIR /api/vendors
 
